@@ -6,6 +6,7 @@
 #include "dirent.h"
 #include <fstream>
 
+#include "/Users/alainhoefdraad/Downloads/chilkat-9.5.0-macosx/include/CkCrypt2.h"
 using namespace std;
 
 Directory::Directory(const char* Directory) : Dir(Directory)
@@ -14,27 +15,24 @@ Directory::Directory(const char* Directory) : Dir(Directory)
 
 Directory::~Directory()
 {
-
 }
 
 void Directory::scanDir() {
     struct dirent *ent;
-    if ((dir = opendir (Dir)) != NULL) {
-        /* print all the files and directories within directory */
-        while ((ent = readdir (dir)) != NULL) {
+
+    if ((dir = opendir (Dir)) != NULL)
+    {
+        while ((ent = readdir (dir)) != NULL)
+        {
             printf ("%s\n", ent->d_name);
-            ifstream myFile (ent->d_name);
-            myFile.read (buffer, 100);
-            for(int i =0; i < 100; i++)
-            {
-                cout << buffer[i] << endl;
-            }
+            Files.push_back(ent->d_name);
         }
         closedir (dir);
-    } else {
-        /* could not open directory */
-        perror ("");
-        //return EXIT_FAILURE;
     }
+
+    else
+        {
+        cout << "could not open directory" << endl;
+        }
 
 }
