@@ -39,5 +39,5 @@ void HasherImplementation::Hash(string File)
     }
 
     ss << hex << setw(8) << setfill('0') << magic;
-    cout << "Hashed File: " << ss.str() << endl;
+    cout << "Hash = " << ss.str() << endl;
 }

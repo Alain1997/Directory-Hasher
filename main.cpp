@@ -5,12 +5,12 @@
 
 int main()
 {
-    string DirPath;
+    char* DirPath;
     cout << "Start Program" << endl;
     cout << "Enter a directory to scan: ";
     cin >> DirPath;
     HasherImplementation Hasher;
-    Directory Directory("/Users/alainhoefdraad/Desktop/SWAPD_Opdrachten", Hasher);
+    Directory Directory(DirPath, Hasher);
     Directory.scanDir();
     return 0;
 }

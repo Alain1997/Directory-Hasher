@@ -26,8 +26,9 @@ void Directory::scanDir() {
     {
         while ((ent = readdir (dir)) != NULL)
         {
-            printf ("%s\n", ent->d_name);
+            //printf ("%s\n", ent->d_name);
             string filename = ent->d_name;
+            cout << "File = " << filename << " : ";
             string dirpath = Dir;
             filepath = dirpath + "/" + filename;
             hashFiles(filepath);
