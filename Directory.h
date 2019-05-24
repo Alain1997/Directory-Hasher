@@ -8,22 +8,24 @@
 #include <iostream>
 #include <vector>
 #include "dirent.h"
+#include "HasherImplementation.h"
+#include <string>
 
 using namespace std;
 
 
 class Directory {
 public:
-    Directory(const char* Directory);
+    Directory(const char* Directory, HasherImplementation H);
     virtual ~Directory();
     virtual void scanDir();
-    //virtual void hashFiles();
+    virtual void hashFiles(string F);
 
 private:
     const char* Dir;
-    vector<string> Files;
-    DIR *dir;
-    char buffer[100] = "";
+    DIR * dir;
+    HasherImplementation Hasher;
+    string filepath;
 };
 
 

@@ -5,11 +5,13 @@
 #include "Directory.h"
 #include "dirent.h"
 #include <fstream>
+#include "HasherImplementation.h"
+#include <iostream>
 
 #include "/Users/alainhoefdraad/Downloads/chilkat-9.5.0-macosx/include/CkCrypt2.h"
 using namespace std;
 
-Directory::Directory(const char* Directory) : Dir(Directory)
+Directory::Directory(const char* Directory, HasherImplementation H) : Dir(Directory), Hasher(H)
 {
 }
 
@@ -25,7 +27,10 @@ void Directory::scanDir() {
         while ((ent = readdir (dir)) != NULL)
         {
             printf ("%s\n", ent->d_name);
-            Files.push_back(ent->d_name);
+            string filename = ent->d_name;
+            string dirpath = Dir;
+            filepath = dirpath + "/" + filename;
+            hashFiles(filepath);
         }
         closedir (dir);
     }
@@ -35,4 +40,9 @@ void Directory::scanDir() {
         cout << "could not open directory" << endl;
         }
 
+}
+
+void Directory::hashFiles(string F)
+{
+    Hasher.Hash(F);
 }
